@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+
+<robot name="abb_l515" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find abb_irb1200_gazebo)/urdf/irb1200_5_90_macro.xacro" />
+  <xacro:include filename="$(find abb_l515_description)/urdf/_l515_mount.urdf.xacro"/>
+  <xacro:include filename="$(find realsense2_description)/urdf/_l515.urdf.xacro" />
+  <xacro:include filename="$(find abb_l515_description)/urdf/_l515_kinect_plugin.urdf.xacro" />
+
+  <xacro:property name="prefix" value="" />
+  <xacro:property name="name" value="camera" />
+
+  <xacro:abb_irb1200_5_90_gazebo prefix="${prefix}" />
+  <xacro:mount_l515 parent="${prefix}tool0" name="mount_l515" />
+  <xacro:sensor_l515 parent="${prefix}tool0" name="camera" use_nominal_extrinsics="true">
+  <!-- <origin xyz="0.08010264817074966 0.0010650384356907369 0.010552961331817563" rpy="-0.7662698 -1.5486988 0.7653934"/> -->
+  <!-- <origin xyz="0.08010264817074966 0.0010650384356907369 0.010552961331817563" rpy="-${pi/2} 0.0 ${pi/2}"/> -->
+  <origin xyz="0.08010264817074966 0.0010650384356907369 0.010552961331817563" rpy="${pi/2} 0.0 -${pi/2}"/>
+  <!-- <origin xyz="0.075 0 0.0175" rpy="${pi/2} 0.0 -${pi/2}"/> -->
+  </xacro:sensor_l515>
+  <xacro:plugin_l515 parent="${name}_link" name="${name}" />
+
+  <!-- Connect robot to world. -->
+  <link name="world" />
+  <joint name="world_to_base_link_joint" type="fixed">
+    <!-- <origin xyz="0.5 0.5 0.525" rpy="0 0 -${pi/2}"/> -->
+    <origin xyz="0 0 0.385" rpy="0 0 0"/>
+    <parent link="world" />
+    <child link="${prefix}base_link" />
+  </joint>
+
+  <!-- Connect camera mount to arm. -->
+  <joint name="$arm_to_mount_joint" type="fixed">
+    <origin xyz="0.032755 0 0" rpy="-${pi/2} 0 ${pi/2}"/>
+    <parent link="${prefix}tool0"/>
+    <child link="mount_l515_link" />
+  </joint>
+
+  <!-- Plugin for ros_control. -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+</robot>

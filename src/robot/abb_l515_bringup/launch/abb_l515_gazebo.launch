@@ -1,0 +1,19 @@
+<launch>
+  <!-- remap topics to conform to ROS-I specifications -->
+  <remap from="/arm_controller/follow_joint_trajectory" to="/joint_trajectory_action" />
+  <remap from="/arm_controller/state" to="/feedback_states" />
+  <remap from="/arm_controller/command" to="/joint_path_command"/>
+
+  <!-- start simulated world -->
+  <arg name="model" default="bunny" doc="The model to be loaded in the simulation"/>
+  <include file="$(find simulation_environment)/launch/simulation_environment.launch" pass_all_args="true" />
+
+  <!-- load urdf -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find abb_l515_description)/urdf/abb_l515r.xacro'" />
+
+  <!-- spawn robot in gazebo -->
+  <node name="abb_l515_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model abb_l515" />
+
+  <!-- arm controller -->
+  <include file="$(find abb_irb1200_gazebo)/launch/irb1200_5_90_control.launch"/>
+</launch>

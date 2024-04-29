@@ -1,0 +1,8 @@
+frames:
+  world_frame_id: "world"
+  base_frame_id: "base_link"
+  camera_frame_id: "camera_color_optical_frame"
+sensors:
+  max_range: 0.75
+  horizontal_fov: 0.698132 # 1.047 1.22173
+  vertical_fov: 0.523599 # 0.5889375 0.750492

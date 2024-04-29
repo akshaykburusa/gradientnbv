@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<xacro:macro name="plugin_l515" params="name parent">
+
+		<!-- Gazebo plugin for depth camera -->
+		<gazebo reference="${parent}">
+			<material>Gazebo/Wood</material>
+			<sensor type="depth" name="${name}">
+				<pose>0 0 0 0 0 0</pose>
+				<update_rate>60</update_rate>
+				<always_on>true</always_on>
+				<visualize>false</visualize>
+				<camera>
+					<!-- <horizontal_fov>1.22173</horizontal_fov> -->
+					<horizontal_fov>0.698132</horizontal_fov>
+					<image>
+						<width>600</width>
+						<height>450</height>
+						<format>R8G8B8</format>
+					</image>
+					<clip>
+						<near>0.05</near>
+						<far>1.5</far>
+					</clip>
+				</camera>
+				<plugin name="camera_controller" filename="libgazebo_ros_openni_kinect.so">
+					<baseline>0.2</baseline>
+					<alwaysOn>true</alwaysOn>
+					<updateRate>0.0</updateRate>
+					<cameraName>${name}</cameraName>
+					<frameName>${name}_depth_optical_frame</frameName>
+					<imageTopicName>color/image_rect_color</imageTopicName>
+					<depthImageTopicName>aligned_depth_to_color/image_raw</depthImageTopicName>
+					<pointCloudTopicName>depth_registered/points</pointCloudTopicName>
+					<cameraInfoTopicName>color/camera_info</cameraInfoTopicName>
+					<depthImageCameraInfoTopicName>aligned_depth_to_color/camera_info</depthImageCameraInfoTopicName>
+					<pointCloudCutoff>0.05</pointCloudCutoff>
+					<pointCloudCutoffMax>1.5</pointCloudCutoffMax>
+					<hackBaseline>0.0</hackBaseline>
+					<distortionK1>0.0</distortionK1>
+					<distortionK2>0.0</distortionK2>
+					<distortionK3>0.0</distortionK3>
+					<distortionT1>0.0</distortionT1>
+					<distortionT2>0.0</distortionT2>
+					<CxPrime>0.0</CxPrime>
+					<Cx>0.0</Cx>
+					<Cy>0.0</Cy>
+					<focalLength>0.0</focalLength>
+				</plugin>
+			</sensor>
+			<turnGravityOff>true</turnGravityOff>
+		</gazebo>
+
+	</xacro:macro>
+</robot>

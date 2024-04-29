@@ -1,0 +1,21 @@
+# ROS specific directories
+build/
+devel/
+data/
+
+# Other ROS stuff
+CATKIN_IGNORE*
+.catkin_workspace
+
+# External repositories
+extras/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Visual studio code
+.vscode/
+
+# Misc
+*ini

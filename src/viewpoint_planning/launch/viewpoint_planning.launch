@@ -1,0 +1,9 @@
+<launch>
+  <!-- launch Rviz for visualization -->
+  <include file="$(find abb_l515_moveit_config)/launch/moveit_rviz.launch">
+    <arg name="rviz_config" value="$(find viewpoint_planning)/config/moveit.rviz"/>
+    <arg name="debug" value="false"/>
+  </include>
+  <!-- task manager -->
+  <node name="viewpoint_planning" pkg="viewpoint_planning" type="viewpoint_planning_node.py" output="screen" />
+</launch>

@@ -1,0 +1,30 @@
+<launch>
+  <!-- Bring up the agent. -->
+ 
+  <!--~~~~~~~~~~~~~~~~~~ Robot configuration ~~~~~~~~~~~~~~~~~~-->
+
+  <!-- non-standard joint names -->
+  <rosparam command="load" file="$(find abb_irb1200_support)/config/joint_names_irb1200_5_90.yaml" />
+  <!-- load the robot_description parameter before launching ROS-Industrial nodes -->
+  <include file="$(find abb_l515_moveit_config)/launch/planning_context.launch" >
+    <arg name="load_robot_description" value="true" />
+  </include>
+  <!-- parameters -->
+  <rosparam file="$(find abb_l515_bringup)/config/abb_l515.yaml" command="load" ns="agent" subst_value="true" />
+
+  <!--~~~~~~~~~~~~~~~~~~ Execution ~~~~~~~~~~~~~~~~~~-->
+
+  <!-- gazebo environment -->
+  <arg name="model" default="bunny" doc="The model to be loaded in the simulation"/>
+  <include file="$(find abb_l515_bringup)/launch/abb_l515_gazebo.launch" pass_all_args="true" />
+
+  <!-- publish joint states in TF -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen" />
+  <!-- abb arm control -->
+  <include file="$(find abb_control)/launch/arm_control_node.launch" />
+
+  <!-- run the main MoveIt executable -->
+  <include file="$(find abb_l515_moveit_config)/launch/move_group.launch">
+    <arg name="publish_monitored_planning_scene" value="true" />
+  </include>
+</launch>

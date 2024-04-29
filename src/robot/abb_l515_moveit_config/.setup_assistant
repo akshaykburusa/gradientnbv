@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: abb_l515_description
+    relative_path: urdf/abb_l515r.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/abb_l515.srdf
+  CONFIG:
+    author_name: Akshay K. Burusa
+    author_email: akshaykumar.burusa@wur.nl
+    generated_timestamp: 1664625239

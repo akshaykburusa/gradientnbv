@@ -1,0 +1,11 @@
+<launch>
+  <arg name="paused" default="false"/>
+  <arg name="model" default="bunny" doc="The model to be loaded in the simulation"/>
+
+  <!-- start simulated world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find simulation_environment)/worlds/$(arg model).world"/>
+    <arg name="gui" value="true"/>
+    <arg name="paused" value="$(arg paused)"/>
+  </include>
+</launch>
