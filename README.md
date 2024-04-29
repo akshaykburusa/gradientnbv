@@ -9,7 +9,7 @@
   </p>
 </p>
 
-https://github.com/akshaykburusa/gradientnbv_test/assets/127020264/230f0f3c-5439-46f1-ba47-92fc222db581
+https://github.com/akshaykburusa/gradientnbv/assets/127020264/dfa1f2a9-f07c-4af0-84ef-7ea20a7cb61b
 
 ## Installation
 
