@@ -76,3 +76,13 @@ Start the gradient-based local next-best-view planner in a new terminal:
 conda activate grad_nbv
 roslaunch viewpoint_planning viewpoint_planning.launch
 ```
+
+## Citation
+```bibtex
+@article{burusa2023gradient,
+  title={Gradient-based Local Next-best-view Planning for Improved Perception of Targeted Plant Nodes},
+  author={Burusa, Akshay K and van Henten, Eldert J and Kootstra, Gert},
+  journal={arXiv preprint arXiv:2311.16759},
+  year={2023}
+}
+```
