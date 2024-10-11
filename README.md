@@ -10,7 +10,7 @@
 </p>
 
 <h2 align="center">
-  <a href="https://arxiv.org/abs/1234.56789" target="_blank">Paper</a>
+  <a href="https://ieeexplore.ieee.org/abstract/document/10610397" target="_blank">Paper</a>
 </h2>
 
 https://github.com/akshaykburusa/gradientnbv/assets/127020264/dfa1f2a9-f07c-4af0-84ef-7ea20a7cb61b
